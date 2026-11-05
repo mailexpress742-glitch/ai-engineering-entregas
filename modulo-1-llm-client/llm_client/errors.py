@@ -8,6 +8,20 @@ import openai
 from .schemas import LLMError
 
 
+def _detail(exc: BaseException) -> str:
+    """Mensaje legible: el cuerpo del error de la API si existe (ej. 404 con motivo)."""
+    text = str(exc)
+    response = getattr(exc, "response", None)
+    if response is not None and text.strip().startswith("Error code:"):
+        try:
+            body = response.text.strip()
+        except Exception:  # noqa: BLE001
+            body = ""
+        if body:
+            text = f"{text} - {' '.join(body.split())[:300]}"
+    return text
+
+
 def to_llm_error(exc: BaseException) -> LLMError:
     """Convierte cualquier excepción en un error controlado.
 
@@ -16,7 +30,7 @@ def to_llm_error(exc: BaseException) -> LLMError:
     ``APIConnectionError``, así que se evalúa primero.
     """
     # Nunca interpolar la API key: los mensajes del SDK ya la enmascaran.
-    msg = str(exc) or exc.__class__.__name__
+    msg = _detail(exc) or exc.__class__.__name__
 
     if isinstance(exc, (openai.APITimeoutError, anthropic.APITimeoutError, TimeoutError)):
         return LLMError(kind="timeout", message=msg, retryable=True)

@@ -33,7 +33,7 @@ _PROVIDERS: dict[Provider, type[BaseLLMClient]] = {
 _DEFAULT_MODELS: dict[Provider, str] = {
     "openai": "gpt-4o-mini",
     "anthropic": "claude-haiku-4-5",
-    "gemini": "gemini-2.5-flash",
+    "gemini": "gemini-3.8-flash",
 }
 
 _ENV_KEYS: dict[Provider, str] = {
