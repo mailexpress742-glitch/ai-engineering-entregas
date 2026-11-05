@@ -108,7 +108,7 @@ def test_factory_elige_proveedor(monkeypatch):
 
 
 def test_factory_proveedor_invalido(monkeypatch):
-    monkeypatch.setenv("LLM_PROVIDER", "gemini")
+    monkeypatch.setenv("LLM_PROVIDER", "cohere")
     with pytest.raises(ValueError):
         AsyncLLMManager.from_env()
 
