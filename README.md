@@ -5,7 +5,7 @@ Repositorio con las pre-entregas del curso **AI Engineering** (Coderhouse).
 | Módulo | Entrega | Carpeta |
 |---|---|---|
 | 1 | Cliente de LLM robusto y asíncrono | [`modulo-1-llm-client`](modulo-1-llm-client/) |
-| 2 | Pipeline de procesamiento validado | _pendiente_ |
+| 2 | Pipeline de procesamiento validado | [`modulo-2-pipeline-validado`](modulo-2-pipeline-validado/) |
 | 3 | Sistema de recuperación semántica local (RAG) | _pendiente_ |
 | 4 | Sistema RAG escalable con Pinecone | _pendiente_ |
 | 5 | Agente de razonamiento cíclico con memoria persistente | _pendiente_ |
