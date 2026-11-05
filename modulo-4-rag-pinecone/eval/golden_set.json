@@ -1,0 +1,14 @@
+[
+  {"pregunta": "¿Cómo uso asyncio.gather para correr varias corrutinas a la vez sin que una excepción cancele a las demás?", "documento_id_esperado": "asyncio.tasks"},
+  {"pregunta": "¿Para qué sirve asyncio.shield?", "documento_id_esperado": "asyncio.tasks"},
+  {"pregunta": "¿Cómo limito cuántas corrutinas acceden a la vez a un recurso compartido?", "documento_id_esperado": "asyncio.locks"},
+  {"pregunta": "¿Cómo cancelo automáticamente una operación asíncrona si tarda demasiado, usando un bloque with?", "documento_id_esperado": "asyncio.timeouts"},
+  {"pregunta": "¿Qué devuelve Counter.most_common?", "documento_id_esperado": "collections"},
+  {"pregunta": "¿Cómo obtengo los n elementos más grandes de un iterable sin ordenarlo completo?", "documento_id_esperado": "heapq"},
+  {"pregunta": "¿Cómo guardo en caché los resultados de una función con lru_cache?", "documento_id_esperado": "functools"},
+  {"pregunta": "¿Cómo agrupo elementos consecutivos que comparten la misma clave?", "documento_id_esperado": "itertools"},
+  {"pregunta": "¿Cómo reemplazo todas las coincidencias de una expresión regular en un string?", "documento_id_esperado": "re"},
+  {"pregunta": "¿Cómo convierto un diccionario de Python a un string JSON con indentación?", "documento_id_esperado": "json"},
+  {"pregunta": "¿Cómo ignoro una excepción específica dentro de un with usando suppress?", "documento_id_esperado": "contextlib"},
+  {"pregunta": "¿Cómo creo una copia de un dataclass cambiando algunos campos?", "documento_id_esperado": "dataclasses"}
+]
