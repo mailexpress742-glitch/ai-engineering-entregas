@@ -8,7 +8,7 @@ Repositorio con las pre-entregas del curso **AI Engineering** (Coderhouse).
 | 2 | Pipeline de procesamiento validado | [`modulo-2-pipeline-validado`](modulo-2-pipeline-validado/) |
 | 3 | Sistema de recuperación semántica local (RAG) | [`modulo-3-rag-local`](modulo-3-rag-local/) |
 | 4 | Sistema RAG escalable con Pinecone | [`modulo-4-rag-pinecone`](modulo-4-rag-pinecone/) |
-| 5 | Agente de razonamiento cíclico con memoria persistente | _pendiente_ |
+| 5 | Agente de razonamiento cíclico con memoria persistente | [`modulo-5-agente-langgraph`](modulo-5-agente-langgraph/) |
 | 6 | Orquestador multi-agente especializado | _pendiente_ |
 | 7 | API de producción y monitoreo activo | _pendiente_ |
 | 8 | Entrega final | _pendiente_ |

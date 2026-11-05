@@ -1,0 +1,318 @@
+{
+  "recursion_limit": 10,
+  "escenarios": [
+    {
+      "thread_id": "demo-multipaso",
+      "llamadas_a_herramientas": 3,
+      "pasos": [
+        {
+          "paso": 1,
+          "tipo": "usuario",
+          "nodo": "usuario",
+          "contenido": "¿Cuántos pedidos tuvo el cliente 102, cuál fue el total y qué productos incluyó su último pedido?"
+        },
+        {
+          "paso": 2,
+          "tipo": "accion",
+          "nodo": "agente",
+          "herramienta": "buscar_pedidos",
+          "argumentos": {
+            "cliente_id": 102
+          }
+        },
+        {
+          "paso": 3,
+          "tipo": "observacion",
+          "nodo": "tools",
+          "herramienta": "buscar_pedidos",
+          "resultado": {
+            "cliente_id": 102,
+            "cliente": "Martín Acosta",
+            "pedidos": 3,
+            "total": 14500,
+            "ids_pedidos": [
+              {
+                "id": "P-1001",
+                "fecha": "2025-03-10"
+              },
+              {
+                "id": "P-1007",
+                "fecha": "2025-05-22"
+              },
+              {
+                "id": "P-1013",
+                "fecha": "2025-08-14"
+              }
+            ]
+          }
+        },
+        {
+          "paso": 4,
+          "tipo": "pensamiento",
+          "nodo": "agente",
+          "contenido": "Ahora obtengo el detalle del último pedido:"
+        },
+        {
+          "paso": 5,
+          "tipo": "accion",
+          "nodo": "agente",
+          "herramienta": "detalle_pedido",
+          "argumentos": {
+            "pedido_id": "P-1013"
+          }
+        },
+        {
+          "paso": 6,
+          "tipo": "observacion",
+          "nodo": "tools",
+          "herramienta": "detalle_pedido",
+          "resultado": {
+            "pedido_id": "P-1013",
+            "cliente": "Martín Acosta",
+            "fecha": "2025-08-14",
+            "total": 5000,
+            "estado": "en camino",
+            "items": [
+              "Monitor 24 pulgadas (seña)"
+            ]
+          }
+        },
+        {
+          "paso": 7,
+          "tipo": "respuesta",
+          "nodo": "agente",
+          "contenido": "**Resumen del cliente 102 (Martín Acosta):**\n\n- **Cantidad de pedidos:** 3\n- **Total gastado:** $14.500\n- **Último pedido (P-1013):** \n  - Fecha: 14 de agosto de 2025\n  - Estado: En camino\n  - Productos: Monitor 24 pulgadas (seña)\n  - Monto: $5.000"
+        },
+        {
+          "paso": 8,
+          "tipo": "usuario",
+          "nodo": "usuario",
+          "contenido": "¿y el pedido anterior a ese, cuánto costó?"
+        },
+        {
+          "paso": 9,
+          "tipo": "accion",
+          "nodo": "agente",
+          "herramienta": "detalle_pedido",
+          "argumentos": {
+            "pedido_id": "P-1007"
+          }
+        },
+        {
+          "paso": 10,
+          "tipo": "observacion",
+          "nodo": "tools",
+          "herramienta": "detalle_pedido",
+          "resultado": {
+            "pedido_id": "P-1007",
+            "cliente": "Martín Acosta",
+            "fecha": "2025-05-22",
+            "total": 5500,
+            "estado": "entregado",
+            "items": [
+              "Mouse inalámbrico",
+              "Alfombrilla"
+            ]
+          }
+        },
+        {
+          "paso": 11,
+          "tipo": "respuesta",
+          "nodo": "agente",
+          "contenido": "El pedido anterior (P-1007) del 22 de mayo de 2025 costó **$5.500** e incluía un Mouse inalámbrico y una Alfombrilla. Su estado es entregado."
+        }
+      ]
+    },
+    {
+      "thread_id": "demo-aclaracion_y_reintento",
+      "llamadas_a_herramientas": 4,
+      "pasos": [
+        {
+          "paso": 1,
+          "tipo": "usuario",
+          "nodo": "usuario",
+          "contenido": "¿Qué compró Lucía en su último pedido?"
+        },
+        {
+          "paso": 2,
+          "tipo": "pensamiento",
+          "nodo": "agente",
+          "contenido": "Necesito buscar a Lucía primero para obtener su `cliente_id`, y luego ver sus pedidos."
+        },
+        {
+          "paso": 3,
+          "tipo": "accion",
+          "nodo": "agente",
+          "herramienta": "buscar_cliente",
+          "argumentos": {
+            "nombre": "Lucía"
+          }
+        },
+        {
+          "paso": 4,
+          "tipo": "observacion",
+          "nodo": "tools",
+          "herramienta": "buscar_cliente",
+          "resultado": {
+            "coincidencias": [
+              {
+                "cliente_id": 103,
+                "nombre": "Lucía Fernández"
+              },
+              {
+                "cliente_id": 104,
+                "nombre": "Lucía Ferrero"
+              }
+            ]
+          }
+        },
+        {
+          "paso": 5,
+          "tipo": "respuesta",
+          "nodo": "agente",
+          "contenido": "Tengo dos coincidencias. ¿Cuál es Lucía? ¿Fernández o Ferrero?"
+        },
+        {
+          "paso": 6,
+          "tipo": "usuario",
+          "nodo": "usuario",
+          "contenido": "Lucía Fernández"
+        },
+        {
+          "paso": 7,
+          "tipo": "pensamiento",
+          "nodo": "agente",
+          "contenido": "Perfecto, ahora busco sus pedidos."
+        },
+        {
+          "paso": 8,
+          "tipo": "accion",
+          "nodo": "agente",
+          "herramienta": "buscar_pedidos",
+          "argumentos": {
+            "cliente_id": 103
+          }
+        },
+        {
+          "paso": 9,
+          "tipo": "observacion",
+          "nodo": "tools",
+          "herramienta": "buscar_pedidos",
+          "resultado": {
+            "cliente_id": 103,
+            "cliente": "Lucía Fernández",
+            "pedidos": 1,
+            "total": 8300,
+            "ids_pedidos": [
+              {
+                "id": "P-1019",
+                "fecha": "2025-09-01"
+              }
+            ]
+          }
+        },
+        {
+          "paso": 10,
+          "tipo": "pensamiento",
+          "nodo": "agente",
+          "contenido": "Ahora obtengo el detalle de ese pedido:"
+        },
+        {
+          "paso": 11,
+          "tipo": "accion",
+          "nodo": "agente",
+          "herramienta": "detalle_pedido",
+          "argumentos": {
+            "pedido_id": "P-1019"
+          }
+        },
+        {
+          "paso": 12,
+          "tipo": "observacion",
+          "nodo": "tools",
+          "herramienta": "detalle_pedido",
+          "resultado": {
+            "error": "Timeout de la base de datos.",
+            "sugerencia": "Reintentá la misma consulta.",
+            "reintentable": true
+          }
+        },
+        {
+          "paso": 13,
+          "tipo": "pensamiento",
+          "nodo": "agente",
+          "contenido": "Dejame reintentar:"
+        },
+        {
+          "paso": 14,
+          "tipo": "accion",
+          "nodo": "agente",
+          "herramienta": "detalle_pedido",
+          "argumentos": {
+            "pedido_id": "P-1019"
+          }
+        },
+        {
+          "paso": 15,
+          "tipo": "observacion",
+          "nodo": "tools",
+          "herramienta": "detalle_pedido",
+          "resultado": {
+            "pedido_id": "P-1019",
+            "cliente": "Lucía Fernández",
+            "fecha": "2025-09-01",
+            "total": 8300,
+            "estado": "entregado",
+            "items": [
+              "Auriculares",
+              "Webcam HD"
+            ]
+          }
+        },
+        {
+          "paso": 16,
+          "tipo": "respuesta",
+          "nodo": "agente",
+          "contenido": "En su último pedido (P-1019, del 1 de septiembre de 2025), Lucía Fernández compró:\n- Auriculares\n- Webcam HD\n\nEl pedido fue entregado por un total de **$8.300**."
+        }
+      ]
+    },
+    {
+      "thread_id": "demo-error_cliente_inexistente",
+      "llamadas_a_herramientas": 1,
+      "pasos": [
+        {
+          "paso": 1,
+          "tipo": "usuario",
+          "nodo": "usuario",
+          "contenido": "¿Cuántos pedidos tiene el cliente 999?"
+        },
+        {
+          "paso": 2,
+          "tipo": "accion",
+          "nodo": "agente",
+          "herramienta": "buscar_pedidos",
+          "argumentos": {
+            "cliente_id": 999
+          }
+        },
+        {
+          "paso": 3,
+          "tipo": "observacion",
+          "nodo": "tools",
+          "herramienta": "buscar_pedidos",
+          "resultado": {
+            "error": "No existe el cliente con id 999.",
+            "sugerencia": "Verificá el id con el usuario o buscá al cliente por nombre con buscar_cliente."
+          }
+        },
+        {
+          "paso": 4,
+          "tipo": "respuesta",
+          "nodo": "agente",
+          "contenido": "El cliente con id 999 no existe en el sistema. ¿Podrías proporcionar el nombre del cliente para que lo busque, o verificar que el id sea correcto?"
+        }
+      ]
+    }
+  ]
+}

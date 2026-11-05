@@ -8,3 +8,6 @@ __pycache__/
 .vscode/
 vectorstore/
 chroma_db/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm

@@ -1,0 +1,48 @@
+# thread_id = demo-multipaso
+[01] Usuario      ¿Cuántos pedidos tuvo el cliente 102, cuál fue el total y qué productos incluyó su último pedido?
+[02] Acción       buscar_pedidos(cliente_id=102)
+[03] Observación  buscar_pedidos -> {"cliente_id": 102, "cliente": "Martín Acosta", "pedidos": 3, "total": 14500, "ids_pedidos": [{"id": "P-1001", "fecha": "2025-03-10"}, {"id": "P-1007", "fecha": "2025-05-22"}, {"id": "P-1013", "fecha": "2025-08-14"}]}
+[04] Pensamiento  Ahora obtengo el detalle del último pedido:
+[05] Acción       detalle_pedido(pedido_id='P-1013')
+[06] Observación  detalle_pedido -> {"pedido_id": "P-1013", "cliente": "Martín Acosta", "fecha": "2025-08-14", "total": 5000, "estado": "en camino", "items": ["Monitor 24 pulgadas (seña)"]}
+[07] Respuesta    **Resumen del cliente 102 (Martín Acosta):**
+
+- **Cantidad de pedidos:** 3
+- **Total gastado:** $14.500
+- **Último pedido (P-1013):** 
+  - Fecha: 14 de agosto de 2025
+  - Estado: En camino
+  - Productos: Monitor 24 pulgadas (seña)
+  - Monto: $5.000
+[08] Usuario      ¿y el pedido anterior a ese, cuánto costó?
+[09] Acción       detalle_pedido(pedido_id='P-1007')
+[10] Observación  detalle_pedido -> {"pedido_id": "P-1007", "cliente": "Martín Acosta", "fecha": "2025-05-22", "total": 5500, "estado": "entregado", "items": ["Mouse inalámbrico", "Alfombrilla"]}
+[11] Respuesta    El pedido anterior (P-1007) del 22 de mayo de 2025 costó **$5.500** e incluía un Mouse inalámbrico y una Alfombrilla. Su estado es entregado.
+
+# thread_id = demo-aclaracion_y_reintento
+[01] Usuario      ¿Qué compró Lucía en su último pedido?
+[02] Pensamiento  Necesito buscar a Lucía primero para obtener su `cliente_id`, y luego ver sus pedidos.
+[03] Acción       buscar_cliente(nombre='Lucía')
+[04] Observación  buscar_cliente -> {"coincidencias": [{"cliente_id": 103, "nombre": "Lucía Fernández"}, {"cliente_id": 104, "nombre": "Lucía Ferrero"}]}
+[05] Respuesta    Tengo dos coincidencias. ¿Cuál es Lucía? ¿Fernández o Ferrero?
+[06] Usuario      Lucía Fernández
+[07] Pensamiento  Perfecto, ahora busco sus pedidos.
+[08] Acción       buscar_pedidos(cliente_id=103)
+[09] Observación  buscar_pedidos -> {"cliente_id": 103, "cliente": "Lucía Fernández", "pedidos": 1, "total": 8300, "ids_pedidos": [{"id": "P-1019", "fecha": "2025-09-01"}]}
+[10] Pensamiento  Ahora obtengo el detalle de ese pedido:
+[11] Acción       detalle_pedido(pedido_id='P-1019')
+[12] Observación  detalle_pedido -> {"error": "Timeout de la base de datos.", "sugerencia": "Reintentá la misma consulta.", "reintentable": true}
+[13] Pensamiento  Dejame reintentar:
+[14] Acción       detalle_pedido(pedido_id='P-1019')
+[15] Observación  detalle_pedido -> {"pedido_id": "P-1019", "cliente": "Lucía Fernández", "fecha": "2025-09-01", "total": 8300, "estado": "entregado", "items": ["Auriculares", "Webcam HD"]}
+[16] Respuesta    En su último pedido (P-1019, del 1 de septiembre de 2025), Lucía Fernández compró:
+- Auriculares
+- Webcam HD
+
+El pedido fue entregado por un total de **$8.300**.
+
+# thread_id = demo-error_cliente_inexistente
+[01] Usuario      ¿Cuántos pedidos tiene el cliente 999?
+[02] Acción       buscar_pedidos(cliente_id=999)
+[03] Observación  buscar_pedidos -> {"error": "No existe el cliente con id 999.", "sugerencia": "Verificá el id con el usuario o buscá al cliente por nombre con buscar_cliente."}
+[04] Respuesta    El cliente con id 999 no existe en el sistema. ¿Podrías proporcionar el nombre del cliente para que lo busque, o verificar que el id sea correcto?
