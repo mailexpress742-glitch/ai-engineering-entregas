@@ -2,7 +2,7 @@
 
 Pre-entrega 1 del curso **AI Engineering** (Coderhouse). Un *Unified Async LLM
 Client* en Python 3.12 que permite usar **OpenAI** o **Anthropic** detrás de la
-misma interfaz, con llamadas `async/await`, streaming y errores controlados.
+misma interfaz (más **Gemini** como extra), con llamadas `async/await`, streaming y errores controlados.
 
 ## Estructura
 
@@ -13,6 +13,7 @@ modulo-1-llm-client/
 │   ├── base.py             # BaseLLMClient (ABC) con generate() y stream()
 │   ├── openai_client.py    # OpenAIClient  -> AsyncOpenAI
 │   ├── anthropic_client.py # AnthropicClient -> AsyncAnthropic
+│   ├── gemini_client.py    # GeminiClient -> AsyncOpenAI contra el endpoint compatible de Google
 │   ├── errors.py           # excepciones de los SDKs -> LLMError estructurado
 │   └── manager.py          # AsyncLLMManager: factory + reintentos + errores controlados
 ├── main.py                 # script de validación (modo normal + streaming)
@@ -43,10 +44,11 @@ normal y después en streaming (los tokens se imprimen a medida que llegan).
 
 | Variable | Obligatoria | Descripción |
 |---|---|---|
-| `LLM_PROVIDER` | no (`openai`) | `openai` o `anthropic` |
+| `LLM_PROVIDER` | no (`openai`) | `openai`, `anthropic` o `gemini` |
 | `OPENAI_API_KEY` | si usás OpenAI | API key de OpenAI |
 | `ANTHROPIC_API_KEY` | si usás Anthropic | API key de Anthropic |
-| `LLM_MODEL` | no | por defecto `gpt-4o-mini` / `claude-haiku-4-5` |
+| `GEMINI_API_KEY` | si usás Gemini | API key de Google AI Studio |
+| `LLM_MODEL` | no | por defecto `gpt-4o-mini` / `claude-haiku-4-5` / `gemini-2.5-flash` |
 | `LLM_TEMPERATURE` | no (`0.7`) | entre 0 y 2 (validado con Pydantic) |
 | `LLM_MAX_TOKENS` | no (`1024`) | mayor a 0 |
 | `LLM_TIMEOUT` | no (`60`) | segundos por llamada |

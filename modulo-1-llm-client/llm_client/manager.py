@@ -12,6 +12,7 @@ from pydantic import SecretStr
 from .anthropic_client import AnthropicClient
 from .base import BaseLLMClient
 from .errors import to_llm_error
+from .gemini_client import GeminiClient
 from .openai_client import OpenAIClient
 from .schemas import (
     ChatMessage,
@@ -26,16 +27,19 @@ from .schemas import (
 _PROVIDERS: dict[Provider, type[BaseLLMClient]] = {
     "openai": OpenAIClient,
     "anthropic": AnthropicClient,
+    "gemini": GeminiClient,
 }
 
 _DEFAULT_MODELS: dict[Provider, str] = {
     "openai": "gpt-4o-mini",
     "anthropic": "claude-haiku-4-5",
+    "gemini": "gemini-2.5-flash",
 }
 
 _ENV_KEYS: dict[Provider, str] = {
     "openai": "OPENAI_API_KEY",
     "anthropic": "ANTHROPIC_API_KEY",
+    "gemini": "GEMINI_API_KEY",
 }
 
 

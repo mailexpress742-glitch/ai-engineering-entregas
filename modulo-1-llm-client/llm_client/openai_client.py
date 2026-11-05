@@ -11,18 +11,24 @@ from .schemas import ChatMessage, ModelConfig, ModelResponse, StreamChunk, Usage
 
 
 class OpenAIClient(BaseLLMClient):
+    provider = "openai"
+    base_url: str | None = None  # las subclases compatibles con OpenAI lo pisan
+    max_tokens_param = "max_completion_tokens"
+
     def __init__(self, config: ModelConfig) -> None:
         super().__init__(config)
         key = config.api_key.get_secret_value() if config.api_key else None
         # max_retries=0: los reintentos los controla el manager, no el SDK.
-        self._client = AsyncOpenAI(api_key=key, timeout=config.timeout, max_retries=0)
+        self._client = AsyncOpenAI(
+            api_key=key, base_url=self.base_url, timeout=config.timeout, max_retries=0
+        )
 
     def _params(self, messages: list[ChatMessage]) -> dict:
         params: dict = {
             "model": self.config.model,
             "messages": [m.model_dump() for m in messages],
             "temperature": self.config.temperature,
-            "max_completion_tokens": self.config.max_tokens,
+            self.max_tokens_param: self.config.max_tokens,
         }
         if self.config.top_p is not None:
             params["top_p"] = self.config.top_p
@@ -34,7 +40,7 @@ class OpenAIClient(BaseLLMClient):
         choice = resp.choices[0]
         usage = resp.usage
         return ModelResponse(
-            provider="openai",
+            provider=self.provider,
             model=resp.model,
             content=choice.message.content or "",
             finish_reason=choice.finish_reason,

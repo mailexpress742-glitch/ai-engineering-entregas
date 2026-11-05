@@ -10,7 +10,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, SecretStr
 
-Provider = Literal["openai", "anthropic"]
+Provider = Literal["openai", "anthropic", "gemini"]
 Role = Literal["system", "user", "assistant"]
 
 ErrorKind = Literal[

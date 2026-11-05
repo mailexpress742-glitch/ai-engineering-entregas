@@ -56,6 +56,6 @@ async def main(provider: str | None) -> int:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--provider", choices=["openai", "anthropic"])
+    parser.add_argument("--provider", choices=["openai", "anthropic", "gemini"])
     args = parser.parse_args()
     raise SystemExit(asyncio.run(main(args.provider)))

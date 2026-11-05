@@ -15,6 +15,7 @@ from llm_client import (
     AnthropicClient,
     AsyncLLMManager,
     BaseLLMClient,
+    GeminiClient,
     ChatMessage,
     ModelConfig,
     ModelResponse,
@@ -100,6 +101,10 @@ def test_factory_elige_proveedor(monkeypatch):
     monkeypatch.setenv("LLM_PROVIDER", "openai")
     monkeypatch.setenv("OPENAI_API_KEY", "k")
     assert isinstance(AsyncLLMManager.from_env().client, OpenAIClient)
+    monkeypatch.setenv("LLM_PROVIDER", "gemini")
+    monkeypatch.setenv("GEMINI_API_KEY", "k")
+    mgr = AsyncLLMManager.from_env()
+    assert isinstance(mgr.client, GeminiClient) and mgr.config.model.startswith("gemini")
 
 
 def test_factory_proveedor_invalido(monkeypatch):
