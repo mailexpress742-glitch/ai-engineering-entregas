@@ -48,7 +48,7 @@ normal y después en streaming (los tokens se imprimen a medida que llegan).
 | `OPENAI_API_KEY` | si usás OpenAI | API key de OpenAI |
 | `ANTHROPIC_API_KEY` | si usás Anthropic | API key de Anthropic |
 | `GEMINI_API_KEY` | si usás Gemini | API key de Google AI Studio |
-| `LLM_MODEL` | no | por defecto `gpt-4o-mini` / `claude-haiku-4-5` / `gemini-3.8-flash` |
+| `LLM_MODEL` | no | por defecto `gpt-4o-mini` / `claude-haiku-4-5` / `gemini-3.5-flash-lite` |
 | `LLM_TEMPERATURE` | no (`0.7`) | entre 0 y 2 (validado con Pydantic) |
 | `LLM_MAX_TOKENS` | no (`1024`) | mayor a 0 |
 | `LLM_TIMEOUT` | no (`60`) | segundos por llamada |
