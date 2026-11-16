@@ -12,3 +12,5 @@ chroma_db/
 *.sqlite-wal
 *.sqlite-shm
 !modulo-5-agente-langgraph/trazas/memoria_demo.sqlite
+modulo-7-api-produccion/.venv-phoenix/
+modulo-7-api-produccion/.phoenix/

@@ -1,0 +1,62 @@
+{
+  "job": {
+    "job_id": "8762886af45c44d7bb6d5a537161de0a",
+    "status": "DONE",
+    "consulta": "Según la documentación de respuesta a incidentes, ¿cada cuánto hay que actualizar el estado en un SEV1 y cuál es el RTO de las bases de datos de producción? Calculá cuántas actualizaciones hay en un SEV1 de esa duración y después enviá un comunicado al equipo de guardia con el resultado.",
+    "created_at": 1794853144.6562612,
+    "updated_at": 1794853176.6043124,
+    "started_at": 1794853144.6653836,
+    "resultado": {
+      "respuesta_final": "# RESPUESTA SINTETIZADA\n\n## Respuesta a la solicitud del usuario\n\n**Frecuencia de actualización en SEV1:** Cada 15 minutos (fuente: `02_respuesta_a_incidentes.md#2. Niveles de severidad`).\n\n**RTO de bases de datos de producción:** 2 horas (fuente: `01_politica_de_backups.md#4. Objetivos de recuperación`).\n\n**Número de actualizaciones durante un SEV1:**\nEl analista calculó: 120 minutos (RTO) ÷ 15 minutos (frecuencia) = **8 actualizaciones de estado**.\n\n**Comunicado al equipo de guardia:**\n✓ El ejecutor envió el comunicado al equipo-guardia informando que en un incidente SEV1 de bases de datos de producción se deben realizar **8 actualizaciones de estado** (una cada 15 minutos durante las 2 horas de RTO).\n\n---\n\n**⚠️ Nota importante:** El cálculo asume que la primera actualización ocurre al inicio del periodo de RTO y no incluye actualizaciones adicionales fuera del intervalo de 15 minutos (como la actualización inicial o final). Se recomienda confirmar con el procedimiento si estas actualizaciones deben contarse diferente.",
+      "task_completed": true,
+      "pasos_del_supervisor": 4,
+      "flujo": [
+        "investigador",
+        "analista",
+        "ejecutor",
+        "sintetizador"
+      ],
+      "contribuciones": [
+        {
+          "agente": "investigador",
+          "version": 1,
+          "herramientas": [
+            "buscar_documentacion",
+            "buscar_documentacion",
+            "buscar_documentacion"
+          ],
+          "fuentes": [
+            "02_respuesta_a_incidentes.md#2. Niveles de severidad",
+            "02_respuesta_a_incidentes.md#3. Roles durante un incidente",
+            "01_politica_de_backups.md#4. Objetivos de recuperación",
+            "02_respuesta_a_incidentes.md#6. Análisis posterior (postmortem)"
+          ]
+        },
+        {
+          "agente": "analista",
+          "version": 1,
+          "herramientas": [
+            "convertir_tiempo",
+            "calcular"
+          ],
+          "fuentes": []
+        },
+        {
+          "agente": "ejecutor",
+          "version": 1,
+          "herramientas": [
+            "enviar_comunicado"
+          ],
+          "fuentes": []
+        }
+      ],
+      "advertencias": [],
+      "aprobacion": {
+        "aprobado": true,
+        "comentario": "aprobado en la demo"
+      }
+    },
+    "finished_at": 1794853176.6043124
+  },
+  "comunicados_enviados": 1
+}

@@ -1,0 +1,54 @@
+{
+  "job": {
+    "job_id": "1a987e6c5e9a44e08504a883c5a821cd",
+    "status": "DONE",
+    "consulta": "Según la documentación de respuesta a incidentes, ¿cada cuánto hay que actualizar el estado en un SEV1 y cuál es el RTO de las bases de datos de producción? Calculá cuántas actualizaciones hay en un SEV1 de esa duración y después enviá un comunicado al equipo de guardia con el resultado.",
+    "created_at": 1794853180.5277815,
+    "updated_at": 1794853205.503936,
+    "started_at": 1794853180.5369713,
+    "resultado": {
+      "respuesta_final": "## SÍNTESIS FINAL\n\n**Parámetros de un SEV1 según documentación de respuesta a incidentes:**\n\n- **Frecuencia de actualización de estado:** Cada 15 minutos (fuente: `02_respuesta_a_incidentes.md` → Sección \"2. Niveles de severidad\")\n- **RTO de bases de datos de producción:** 2 horas (fuente: `01_politica_de_backups.md` → Sección \"4. Objetivos de recuperación\")\n\n**Cantidad de actualizaciones durante un SEV1:**\n\nEl analista calculó: 120 minutos ÷ 15 minutos = **8 actualizaciones de estado** a lo largo de las 2 horas de RTO.\n\n**Estado del comunicado al equipo de guardia:**\n\n❌ **NO se envió.** El comunicado fue rechazado en la fase de aprobación humana y por lo tanto no se ejecutó.\n\n---\n\n**Nota:** El investigador señaló que el RTO de 2 horas aplica específicamente a bases de datos de producción; el entorno completo tiene un RTO de 8 horas.",
+      "task_completed": true,
+      "pasos_del_supervisor": 4,
+      "flujo": [
+        "investigador",
+        "analista",
+        "ejecutor",
+        "sintetizador"
+      ],
+      "contribuciones": [
+        {
+          "agente": "investigador",
+          "version": 1,
+          "herramientas": [
+            "buscar_documentacion",
+            "buscar_documentacion"
+          ],
+          "fuentes": [
+            "02_respuesta_a_incidentes.md#2. Niveles de severidad",
+            "02_respuesta_a_incidentes.md#3. Roles durante un incidente",
+            "02_respuesta_a_incidentes.md#6. Análisis posterior (postmortem)"
+          ]
+        },
+        {
+          "agente": "analista",
+          "version": 1,
+          "herramientas": [
+            "convertir_tiempo",
+            "calcular"
+          ],
+          "fuentes": []
+        }
+      ],
+      "advertencias": [
+        "Un humano RECHAZÓ la acción propuesta: no se ejecutó. Motivo: rechazado en la demo"
+      ],
+      "aprobacion": {
+        "aprobado": false,
+        "comentario": "rechazado en la demo"
+      }
+    },
+    "finished_at": 1794853205.503936
+  },
+  "comunicados_enviados": 0
+}

@@ -1,0 +1,37 @@
+# Levanta todo el sistema:  docker compose up --build
+#   api      → http://localhost:8000/docs   (FastAPI + workers asyncio)
+#   redis    → localhost:6379               (estado de jobs, cola y checkpoints)
+#   phoenix  → http://localhost:6006        (dashboard de trazas, costos y latencia)
+# Requiere un .env con ANTHROPIC_API_KEY (ver .env.example).
+services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]   # persistencia a disco (AOF)
+    ports: ["6379:6379"]
+    volumes: ["redis-data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 10
+
+  phoenix:
+    image: arizephoenix/phoenix:latest
+    ports: ["6006:6006"]
+    volumes: ["phoenix-data:/mnt/data"]
+    environment:
+      PHOENIX_WORKING_DIR: /mnt/data
+
+  api:
+    build: .
+    env_file: .env
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      PHOENIX_COLLECTOR_ENDPOINT: http://phoenix:6006
+    ports: ["8000:8000"]
+    depends_on:
+      redis: { condition: service_healthy }
+      phoenix: { condition: service_started }
+
+volumes:
+  redis-data:
+  phoenix-data:

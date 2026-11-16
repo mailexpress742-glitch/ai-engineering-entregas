@@ -1,0 +1,2 @@
+# Servidor del dashboard Arize Phoenix (solo si lo corrés con pip en vez de Docker).
+arize-phoenix>=11

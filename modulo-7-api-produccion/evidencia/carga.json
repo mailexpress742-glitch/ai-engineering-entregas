@@ -1,0 +1,53 @@
+{
+  "peticiones": 5,
+  "ok": 5,
+  "tiempo_total_pared_s": 48.3,
+  "post_max_s": 0.522,
+  "latencia_s": {
+    "p50": 22.75,
+    "p95": 48.2,
+    "max": 48.2
+  },
+  "jobs": [
+    {
+      "job_id": "b806fd5d8037456caccb2ac64ba5a5f4",
+      "status": "DONE",
+      "post_s": 0.522,
+      "total_s": 19.8,
+      "pasos": 3,
+      "error": null
+    },
+    {
+      "job_id": "c4f81bb58a484e8f8afa009912bab394",
+      "status": "DONE",
+      "post_s": 0.38,
+      "total_s": 22.75,
+      "pasos": 3,
+      "error": null
+    },
+    {
+      "job_id": "349a87b070854007b46c58477c25d0f5",
+      "status": "DONE",
+      "post_s": 0.328,
+      "total_s": 21.2,
+      "pasos": 3,
+      "error": null
+    },
+    {
+      "job_id": "4c1daa1537304fad85ac4249914a3246",
+      "status": "DONE",
+      "post_s": 0.367,
+      "total_s": 44.87,
+      "pasos": 4,
+      "error": null
+    },
+    {
+      "job_id": "6167df19ef6f4193bd3e7b92ee0bb88b",
+      "status": "DONE",
+      "post_s": 0.38,
+      "total_s": 48.2,
+      "pasos": 3,
+      "error": null
+    }
+  ]
+}
