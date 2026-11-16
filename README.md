@@ -2,6 +2,11 @@
 
 Repositorio con las pre-entregas del curso **AI Engineering** (Coderhouse).
 
+> **Para quien corrige:** cada pre-entrega está en su propia carpeta (tabla de abajo) con su `README.md`,
+> tests y evidencia. La **Pre-entrega 5** (agente LangGraph con memoria persistente) está en
+> [`modulo-5-agente-langgraph`](modulo-5-agente-langgraph/): su README tiene una tabla
+> "consigna → archivo que la cumple" y `python verificar_entrega.py` comprueba los 12 puntos en segundos.
+
 | Módulo | Entrega | Carpeta |
 |---|---|---|
 | 1 | Cliente de LLM robusto y asíncrono | [`modulo-1-llm-client`](modulo-1-llm-client/) |
