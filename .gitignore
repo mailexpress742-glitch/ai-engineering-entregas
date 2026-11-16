@@ -11,3 +11,4 @@ chroma_db/
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm
+!modulo-5-agente-langgraph/trazas/memoria_demo.sqlite

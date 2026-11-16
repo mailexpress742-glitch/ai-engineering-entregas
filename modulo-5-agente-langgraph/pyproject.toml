@@ -1,0 +1,29 @@
+[project]
+name = "agente-langgraph"
+version = "1.0.0"
+description = "Pre-entrega 5 (AI Engineering): agente ReAct con LangGraph y memoria persistente en SQLite"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "langgraph>=1.0",
+    "langgraph-checkpoint-sqlite>=2.0",
+    "aiosqlite>=0.20",
+    "langchain-core>=1.0",
+    "langchain-anthropic>=1.0",
+    "langchain-openai>=1.0",
+    "pydantic>=2.7",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.24"]
+
+# Instalación alternativa a requirements.txt:  pip install -e ".[dev]"
+[tool.setuptools]
+py-modules = ["graph", "tools", "runner", "main", "llm", "memoria", "verificar_entrega"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+pythonpath = ["."]

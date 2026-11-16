@@ -10,7 +10,9 @@ No hay ningún ``if/else`` manual: el modelo decide cuándo usar cada herramient
 
 from __future__ import annotations
 
+import operator
 import os
+from typing import Annotated, Any
 
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import BaseMessage, SystemMessage, trim_messages
@@ -45,6 +47,19 @@ SYSTEM_PROMPT = (
 )
 
 
+class EstadoAgente(MessagesState):
+    """Estado del grafo: hereda de ``MessagesState`` y agrega un contador propio.
+
+    - ``messages`` (heredado): historial de la conversación; su reducer es ``add_messages``,
+      que agrega los mensajes nuevos en vez de pisar los anteriores.
+    - ``llamadas_a_herramientas``: cuántas herramientas pidió el modelo en la sesión. Su reducer
+      es ``operator.add``: cada nodo devuelve solo el incremento y LangGraph lo suma al acumulado
+      (el estado es inmutable; los nodos no lo modifican, devuelven actualizaciones).
+    """
+
+    llamadas_a_herramientas: Annotated[int, operator.add]
+
+
 def recortar_contexto(mensajes: list[BaseMessage]) -> list[BaseMessage]:
     """Se queda con los últimos ``MAX_MENSAJES_CONTEXTO`` mensajes, empezando siempre en un
     mensaje del usuario para no separar una llamada a herramienta de su resultado."""
@@ -62,12 +77,15 @@ def build_graph(llm: BaseChatModel, checkpointer=None) -> CompiledStateGraph:
     """Compila el grafo del agente. ``checkpointer`` aporta la memoria por ``thread_id``."""
     llm_con_herramientas = llm.bind_tools(TOOLS)
 
-    async def nodo_agente(state: MessagesState) -> dict[str, list[BaseMessage]]:
+    async def nodo_agente(state: EstadoAgente) -> dict[str, Any]:
         contexto = recortar_contexto(state["messages"])
         respuesta = await llm_con_herramientas.ainvoke([SystemMessage(SYSTEM_PROMPT), *contexto])
-        return {"messages": [respuesta]}  # el reducer de MessagesState lo agrega al historial
+        return {
+            "messages": [respuesta],  # add_messages lo agrega al historial
+            "llamadas_a_herramientas": len(getattr(respuesta, "tool_calls", None) or []),  # operator.add
+        }
 
-    builder = StateGraph(MessagesState)
+    builder = StateGraph(EstadoAgente)
     builder.add_node("agente", nodo_agente)
     builder.add_node("tools", ToolNode(TOOLS))
     builder.add_edge(START, "agente")

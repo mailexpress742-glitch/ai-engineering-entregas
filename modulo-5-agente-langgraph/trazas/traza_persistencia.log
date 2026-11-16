@@ -1,14 +1,11 @@
-# Persistencia entre procesos (salida real de dos ejecuciones nuevas de `python main.py`).
-# Antes se había corrido `python main.py --demo`, que guardó la sesión "demo-multipaso"
-# en agente_memoria.sqlite. Cada comando de abajo es un PROCESO NUEVO de Python.
+# Persistencia entre procesos: salida real de dos ejecuciones NUEVAS de `python main.py`.
+# Antes se corrió `python main.py --demo`, que guardó la sesión 'demo-multipaso' en agente_memoria.sqlite.
+# Cada comando es un proceso de Python distinto (no comparten memoria RAM, solo el archivo SQLite).
 
 $ python main.py --thread demo-multipaso --pregunta "¿De qué cliente veníamos hablando y cuánto había gastado en total?"
-Usuario: ¿De qué cliente veníamos hablando y cuánto había gastado en total?
-Respuesta: Veníamos hablando del cliente **Martín Acosta (ID 102)** y había gastado un total de **$14.500** en sus 3 pedidos.
-(no llamó a ninguna herramienta: lo recordó desde el checkpoint de SQLite)
+Veníamos hablando de **Martín Acosta** (cliente 102), quien había gastado un total de **$14.500**.
 
 $ python main.py --thread otro-hilo --pregunta "¿De qué cliente veníamos hablando y cuánto había gastado en total?"
-Usuario: ¿De qué cliente veníamos hablando y cuánto había gastado en total?
-Respuesta: No tenemos un cliente del que estuviéramos hablando previamente en esta conversación. Este es el inicio de nuestro diálogo.
-           ¿Podés decirme el nombre del cliente o su número de cliente (cliente_id) para que pueda verificar cuánto ha gastado en total?
-(otro thread_id: sesión aislada, no comparte memoria)
+No tenemos un cliente del que hayamos estado hablando en esta conversación. Es la primera vez que interactuamos.
+¿Podés decirme el nombre del cliente o su ID para que pueda buscar cuánto ha gastado en total?
+

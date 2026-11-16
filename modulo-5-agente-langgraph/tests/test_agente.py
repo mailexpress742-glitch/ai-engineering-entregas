@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, get_type_hints
 
 import pytest
 from langchain_core.language_models.chat_models import BaseChatModel
@@ -159,6 +159,45 @@ async def test_el_modelo_recibe_el_resultado_de_la_herramienta(db):
         await ejecutar_turno(build_graph(modelo, saver), "pedidos del 102", "t")
     segunda_vista = modelo.vistos[1]
     assert any(isinstance(m, ToolMessage) and "14500" in str(m.content) for m in segunda_vista)
+
+
+def test_el_estado_hereda_de_messagesstate_con_reducer_propio():
+    from langgraph.graph import MessagesState
+
+    from graph import EstadoAgente
+
+    # MessagesState es un TypedDict: no admite issubclass(); la herencia se ve en __orig_bases__.
+    assert MessagesState in EstadoAgente.__orig_bases__
+    assert {"messages", "llamadas_a_herramientas"} <= set(get_type_hints(EstadoAgente))
+
+
+async def test_reducer_operator_add_acumula_las_llamadas_a_herramientas(db):
+    guion = [
+        llamada("buscar_pedidos", cliente_id=102),
+        llamada("detalle_pedido", pedido_id="P-1013"),
+        AIMessage(content="listo"),
+    ]
+    config = {"configurable": {"thread_id": "t"}}
+    async with AsyncSqliteSaver.from_conn_string(db) as saver:
+        graph = build_graph(ModeloConGuion(guion=guion), saver)
+        await ejecutar_turno(graph, "pedidos del 102 y su último", "t")
+        estado = (await graph.aget_state(config)).values
+    assert estado["llamadas_a_herramientas"] == 2  # 1 + 1 + 0, sumado por operator.add
+
+
+async def test_la_memoria_se_lee_con_el_sqlitesaver_sincrono(db):
+    import memoria
+
+    async with AsyncSqliteSaver.from_conn_string(db) as saver:  # el agente escribe (async)...
+        graph = build_graph(ModeloConGuion(guion=[AIMessage(content="uno"), AIMessage(content="dos")]), saver)
+        await ejecutar_turno(graph, "primera pregunta", "hilo-1")
+        await ejecutar_turno(graph, "segunda pregunta", "hilo-1")
+    from pathlib import Path
+
+    (fila,) = memoria.listar_sesiones(Path(db))  # ...y SqliteSaver (sync) lo lee del mismo archivo
+    assert fila["thread_id"] == "hilo-1" and fila["turnos_del_usuario"] == 2 and fila["mensajes"] == 4
+    historial = memoria.historial(Path(db), "hilo-1")
+    assert [m.content for m in historial if isinstance(m, HumanMessage)] == ["primera pregunta", "segunda pregunta"]
 
 
 # ------------------------------------------------------------------ persistencia

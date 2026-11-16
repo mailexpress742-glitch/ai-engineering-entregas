@@ -68,7 +68,10 @@ async def correr_demo(provider: str | None, db: Path) -> None:
             print(f"\nHerramientas usadas ({len(traza.herramientas_usadas())}): {traza.herramientas_usadas()}")
 
     import json
+    import shutil
 
+    # Copia de la memoria del demo: evidencia verificable con `python memoria.py`.
+    shutil.copyfile(db, TRAZAS_DIR / "memoria_demo.sqlite")
     (TRAZAS_DIR / "traza_ejemplo.json").write_text(
         json.dumps({"recursion_limit": RECURSION_LIMIT, "escenarios": todas}, ensure_ascii=False, indent=2),
         encoding="utf-8",
@@ -93,7 +96,9 @@ if __name__ == "__main__":
     ap.add_argument("--demo", action="store_true", help="corre los escenarios y guarda las trazas")
     ap.add_argument("--thread", default="default", help="thread_id de la sesión (memoria)")
     ap.add_argument("--pregunta")
-    ap.add_argument("--provider", choices=["anthropic", "openai", "gemini"])
+    # Gemini 3 no sirve para este agente: exige conservar la "thought_signature" en las llamadas a
+    # herramientas y el endpoint compatible con OpenAI no la propaga (400 en el 2.º paso del ciclo).
+    ap.add_argument("--provider", choices=["anthropic", "openai"])
     ap.add_argument("--db", help="archivo SQLite de la memoria")
     args = ap.parse_args()
 
