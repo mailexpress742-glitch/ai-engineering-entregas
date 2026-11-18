@@ -1,0 +1,131 @@
+{
+  "reclamos": 6,
+  "ok": 6,
+  "tiempo_total_pared_s": 111.3,
+  "post_max_s": 2.252,
+  "latencia_s": {
+    "p50": 93.23,
+    "p95": 111.31,
+    "max": 111.31
+  },
+  "acciones_en_la_bandeja": 7,
+  "jobs": [
+    {
+      "nombre": "Carta documento demorada en AMBA",
+      "pieza_id": "CD-100231",
+      "job_id": "99ac75e57e5c41319a33d65ac02d411e",
+      "post_s": 2.252,
+      "status": "DONE",
+      "hasta_aprobacion_s": 93.35,
+      "total_s": 111.31,
+      "accion_propuesta": "Envía respuesta al cliente (Estudio Ferraro & Asociados) usando PLANTILLA CUANDO EL PLAZO ESTÁ VENCIDO (de 11_plantilla_demora.md). Comunica: (a) La CD-100231 debió entregarse dentro de 3 días hábiles (plazo AMBA), pero han transcurrido 5 días hábiles desde la imposición (hace una semana); (b) Lleva 2 días hábiles de ATRASO; (c) La pieza está actualmente en distribución sin acuse de recepción aún; (d) Escala el caso a DISTRIBUCIÓN con prioridad ALTA para: rastrear la pieza CD-100231 en tránsito, contactar al destinatario y obtener el acuse de recepción inmediatamente, considerando que el cliente refiere un \"vencimiento próximo\" (indica al área que el contexto legal del cliente es crítico). Instruye a distribución que reporte el estado en 24 horas hábiles.",
+      "flujo": [
+        "investigador",
+        "analista",
+        "ejecutor",
+        "sintetizador"
+      ],
+      "pasos": 4,
+      "advertencias": [],
+      "error": null
+    },
+    {
+      "nombre": "Acuse pendiente de una pieza entregada (AMBA)",
+      "pieza_id": "CD-100234",
+      "job_id": "ad9b873b81c944d99ab0ff884ecb47fd",
+      "post_s": 0.051,
+      "status": "DONE",
+      "hasta_aprobacion_s": 40.11,
+      "total_s": 74.02,
+      "accion_propuesta": "Responde al cliente (Banco del Litoral) CON la plantilla de demora (11_plantilla_demora.md). Comunica: CD-100234 entregada el 5 nov 2026, plazo para acuse 5 días hábiles (vencido por 4 días hábiles al 9 nov), acuse no existe. ESCALA el caso a área DISTRIBUCION con prioridad ALTA para recuperar/reimpedir el acuse de recibo pendiente. En la comunicación no mencionés «vencimiento legal» porque el cliente no lo indicó.",
+      "flujo": [
+        "investigador",
+        "analista",
+        "ejecutor",
+        "sintetizador"
+      ],
+      "pasos": 4,
+      "advertencias": [],
+      "error": null
+    },
+    {
+      "nombre": "Presunto extravío en Patagonia",
+      "pieza_id": "CD-100236",
+      "job_id": "2f233b14b9fa46a695a554ce2a34ba17",
+      "post_s": 2.121,
+      "status": "DONE",
+      "hasta_aprobacion_s": 58.57,
+      "total_s": 88.59,
+      "accion_propuesta": "Ejecutar una sola acción con dos componentes:\n\n**COMPONENTE 1: Respuesta al cliente (Constructora Andina SRL)**\n- Usar plantilla: \"Plantilla de respuesta: presunto extravío\" (13_plantilla_extravio.md)\n- Datos a incluir en la plantilla:\n  * Pieza: CD-100236\n  * Destino: Neuquén\n  * Días sin movimiento: 23 días hábiles\n  * Estado: **cumple presunción de extravío** (23 días >> 10 requeridos tras vencimiento de plazo)\n  \n**COMPONENTE 2: Escalamiento**\n- Área: siniestros\n- Prioridad: media\n- Lo que debe comunicarse al área: plazo vencido por 17 días hábiles, 23 días sin movimiento registrado, presunción de extravío confirmada, 0 visitas negativas.\n\nAmbos se proponen para aprobación de un humano antes de ejecutarse.",
+      "flujo": [
+        "investigador",
+        "analista",
+        "ejecutor",
+        "sintetizador"
+      ],
+      "pasos": 4,
+      "advertencias": [],
+      "error": null
+    },
+    {
+      "nombre": "Encomienda demorada en el interior",
+      "pieza_id": "EN-204519",
+      "job_id": "5f357a0a9de340669b36bf31b58bf133",
+      "post_s": 2.114,
+      "status": "DONE",
+      "hasta_aprobacion_s": 70.93,
+      "total_s": 94.27,
+      "accion_propuesta": "Responde al cliente Tienda Aurora (reclamo EN-204519, encomienda a Tucumán) con la PLANTILLA CUANDO EL PLAZO ESTÁ VENCIDO (de 11_plantilla_demora.md). Comunica que la encomienda tiene plazo vencido por 3 días hábiles (vencimiento 11-11-2026, hoy sin entrega registrada). En la respuesta, incluí: estado actual (demorada en tránsito), causa (demora operativa en Interior), compromiso de gestión urgente. ESCALA el caso a coordinacion_interior con prioridad ALTA para localización y reentrega inmediata. No menciones presunción de extravío (aún no se activa: faltan 4 días hábiles). Referencia en la comunicación al cliente que el caso está siendo gestionado por el área operativa.",
+      "flujo": [
+        "investigador",
+        "analista",
+        "analista",
+        "ejecutor",
+        "sintetizador"
+      ],
+      "pasos": 5,
+      "advertencias": [],
+      "error": null
+    },
+    {
+      "nombre": "Notificación de cliente corporativo demorada",
+      "pieza_id": "NT-310077",
+      "job_id": "0085ce43120043869c7835b827ca7f7d",
+      "post_s": 2.109,
+      "status": "DONE",
+      "hasta_aprobacion_s": 70.41,
+      "total_s": 93.23,
+      "accion_propuesta": "Responder a Energía del Plata S.A. (cliente corporativo) por la pieza NT-310077 del lote LT-5581 usando la plantilla de demora (11_plantilla_demora.md) adaptada a plazo vencido. Datos a incluir: plazo AMBA 4 días hábiles, días hábiles transcurridos 6, atraso confirmado de 2 días hábiles, estado EN_DISTRIBUCION a 2026-11-12. Comunicar que se reconoce la penalidad contractual por demora mencionada en el lote. Escalar simultáneamente a área SINIESTROS con prioridad URGENTE (cliente corporativo + penalidad contractual + plazo vencido). En el escalamiento, incluir: referencia al lote LT-5581, confirmación de vencimiento, penalidad aplicable, y solicitud de acción inmediata en distribución o de resolución si la pieza no se puede entregar.",
+      "flujo": [
+        "investigador",
+        "analista",
+        "analista",
+        "ejecutor",
+        "sintetizador"
+      ],
+      "pasos": 5,
+      "advertencias": [],
+      "error": null
+    },
+    {
+      "nombre": "Consulta de una pieza dentro del plazo",
+      "pieza_id": "EN-204518",
+      "job_id": "bd8fc737a0544d83a8b2e7a9a5caf9f1",
+      "post_s": 2.129,
+      "status": "DONE",
+      "hasta_aprobacion_s": 87.78,
+      "total_s": 102.65,
+      "accion_propuesta": "Responde al cliente Tienda Aurora sobre la encomienda EN-204518 utilizando la plantilla de demora cuando está dentro del plazo. Comunica: (1) La pieza está en transporte normal (última actualización: impuesta en sucursal Centro el 2026-11-17), (2) Para AMBA, el plazo de entrega estándar es 2 días hábiles desde el día siguiente a la imposición (es decir, se espera entrega hasta el 2026-11-19, miércoles como máximo), (3) Solo 1 día hábil ha transcurrido; la encomienda está dentro del plazo y en su curso normal. No es necesario escalar ni solicitar búsqueda a Distribución en este momento. Usa un tono de confirmación y tranquilidad. No inventés plantillas: usa la que el investigador reportó en 11_plantilla_demora.md#Plantilla cuando está dentro del plazo.",
+      "flujo": [
+        "investigador",
+        "investigador",
+        "analista",
+        "ejecutor",
+        "sintetizador"
+      ],
+      "pasos": 5,
+      "advertencias": [],
+      "error": null
+    }
+  ]
+}

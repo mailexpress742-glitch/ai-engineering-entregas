@@ -1,0 +1,45 @@
+# Levanta TODO el sistema con una sola instrucción:   docker compose up --build
+#   ingesta  → sube la base de conocimiento a Pinecone (idempotente: si ya está al día, no hace nada) y termina
+#   api      → http://localhost:8000/docs   (FastAPI + 5 workers asyncio)
+#   redis    → localhost:6379               (estado de los reclamos, cola y checkpoints de LangGraph)
+#   phoenix  → http://localhost:6006        (dashboard de trazas, costos y latencia)
+# Requiere un .env con las keys (copiá .env.example): ANTHROPIC_API_KEY, PINECONE_API_KEY y la key de embeddings.
+services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]   # persistencia a disco (AOF): los checkpoints sobreviven a un reinicio
+    ports: ["6379:6379"]
+    volumes: ["redis-data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 10
+
+  phoenix:
+    image: arizephoenix/phoenix:latest
+    ports: ["6006:6006"]
+    volumes: ["phoenix-data:/mnt/data"]
+    environment:
+      PHOENIX_WORKING_DIR: /mnt/data
+
+  ingesta:
+    build: .
+    env_file: .env
+    command: ["python", "scripts/ingestar.py"]
+    restart: "no"
+
+  api:
+    build: .
+    env_file: .env
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      PHOENIX_COLLECTOR_ENDPOINT: http://phoenix:6006
+    ports: ["8000:8000"]
+    depends_on:
+      redis: { condition: service_healthy }
+      phoenix: { condition: service_started }
+      ingesta: { condition: service_completed_successfully }
+
+volumes:
+  redis-data:
+  phoenix-data:

@@ -1,0 +1,7 @@
+job_id = f740a8b94a6b49c38e40e5e856ba98c8
+estado = AWAITING_APPROVAL  (pausado esperando aprobación)
+Ahora reiniciá la API y corré:  python scripts/demo_reinicio.py continuar f740a8b94a6b49c38e40e5e856ba98c8
+Tras el reinicio, el reclamo sigue en estado: AWAITING_APPROVAL
+Aprobación pendiente recuperada de Redis: Respondé al cliente con la plantilla que corresponde (y escalá al área si la política lo indica) para este reclamo: RECLAMO de un cliente (canal: web). Cliente: Tienda Aurora Pieza: EN-204518 Mensaje 
+Estado final: DONE · flujo: ['investigador', 'analista', 'ejecutor', 'sintetizador']
+Acciones en la bandeja para la pieza: ["respuesta_cliente", "respuesta_cliente"]

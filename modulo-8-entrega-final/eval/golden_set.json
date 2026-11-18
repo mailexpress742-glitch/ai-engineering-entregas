@@ -1,0 +1,136 @@
+[
+ {
+  "pregunta": "¿Cuántos días hábiles tarda una carta documento en llegar a Patagonia?",
+  "esperado": [
+   "03_plazos_de_entrega.md"
+  ],
+  "servicio": "carta_documento"
+ },
+ {
+  "pregunta": "¿Cuál es el plazo de entrega de una encomienda en el interior del país?",
+  "esperado": [
+   "03_plazos_de_entrega.md",
+   "08_encomiendas.md"
+  ],
+  "servicio": "encomienda"
+ },
+ {
+  "pregunta": "¿En cuánto tiempo se devuelve el acuse de recibo de una pieza entregada en AMBA?",
+  "esperado": [
+   "02_acuses_de_recibo.md",
+   "03_plazos_de_entrega.md"
+  ]
+ },
+ {
+  "pregunta": "¿Cuándo se presume que una pieza está extraviada?",
+  "esperado": [
+   "06_extravio_y_danos.md",
+   "03_plazos_de_entrega.md"
+  ]
+ },
+ {
+  "pregunta": "¿A qué área se escala un reclamo por un acuse sin rendir de una pieza del interior?",
+  "esperado": [
+   "10_zona_interior_y_patagonia.md",
+   "07_escalamiento_por_area.md",
+   "02_acuses_de_recibo.md"
+  ]
+ },
+ {
+  "pregunta": "¿Qué prioridad tiene una carta documento cuyo cliente avisa de un vencimiento legal?",
+  "esperado": [
+   "04_politica_de_reclamos.md",
+   "01_cartas_documento.md"
+  ]
+ },
+ {
+  "pregunta": "¿Cuántas visitas hace el distribuidor y qué pasa después de la segunda visita negativa?",
+  "esperado": [
+   "05_visitas_y_reentrega.md"
+  ]
+ },
+ {
+  "pregunta": "¿Cuál es el tope de indemnización de una encomienda sin valor declarado?",
+  "esperado": [
+   "06_extravio_y_danos.md",
+   "08_encomiendas.md"
+  ]
+ },
+ {
+  "pregunta": "Texto para responderle a un cliente que reclama por la demora de su pieza",
+  "esperado": [
+   "11_plantilla_demora.md"
+  ],
+  "categoria": "plantilla"
+ },
+ {
+  "pregunta": "¿Se puede cambiar el domicilio de una pieza que ya salió a reparto?",
+  "esperado": [
+   "14_datos_de_destino_incorrectos.md"
+  ]
+ },
+ {
+  "pregunta": "¿Cómo se atiende el reclamo de una empresa con penalidad contractual por una notificación demorada?",
+  "esperado": [
+   "09_notificaciones_corporativas.md",
+   "07_escalamiento_por_area.md"
+  ]
+ },
+ {
+  "pregunta": "¿Qué se le dice al cliente cuando se inicia la búsqueda de una pieza sin movimientos?",
+  "esperado": [
+   "13_plantilla_extravio.md",
+   "06_extravio_y_danos.md"
+  ]
+ },
+ {
+  "pregunta": "¿Cuánto tiempo tiene MailEx para dar la primera respuesta a un reclamo?",
+  "esperado": [
+   "04_politica_de_reclamos.md"
+  ]
+ },
+ {
+  "pregunta": "¿Quién controla las rendiciones pendientes de los distribuidores?",
+  "esperado": [
+   "10_zona_interior_y_patagonia.md"
+  ]
+ },
+ {
+  "pregunta": "Mi paquete desapareció y nadie me da noticias, ¿qué hace la empresa para encontrarlo?",
+  "esperado": [
+   "06_extravio_y_danos.md",
+   "13_plantilla_extravio.md"
+  ]
+ },
+ {
+  "pregunta": "No había nadie en casa y me dejaron un papelito, ¿hasta cuándo puedo ir a buscarla?",
+  "esperado": [
+   "05_visitas_y_reentrega.md"
+  ]
+ },
+ {
+  "pregunta": "¿Me devuelven la plata si llega rota la caja?",
+  "esperado": [
+   "06_extravio_y_danos.md",
+   "08_encomiendas.md"
+  ]
+ },
+ {
+  "pregunta": "Quiero corregir el código postal después de que el cartero ya salió",
+  "esperado": [
+   "14_datos_de_destino_incorrectos.md"
+  ]
+ },
+ {
+  "pregunta": "lote LT rescate de piezas informe de rendición",
+  "esperado": [
+   "09_notificaciones_corporativas.md"
+  ]
+ },
+ {
+  "pregunta": "prefijo EN seis dígitos numeración",
+  "esperado": [
+   "08_encomiendas.md"
+  ]
+ }
+]

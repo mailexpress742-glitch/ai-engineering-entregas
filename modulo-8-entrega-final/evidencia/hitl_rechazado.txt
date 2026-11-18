@@ -1,0 +1,57 @@
+1) Reclamo: Encomienda demorada en el interior → EN-204519
+   job_id = 1e49447c1ea14bd9b435977e33a8d21f  (la API respondió en 0.01 s; los agentes trabajan en segundo plano)
+
+2) El grafo se PAUSÓ pidiendo aprobación. Propuesta del sistema:
+   Ejecuta la siguiente acción:
+
+**CLIENTE:** Tienda Aurora
+**PIEZA:** EN-204519 (Encomienda a Tucumán)
+**DIAGNÓSTICO DEL ANALISTA:** Plazo VENCIDO por 3 días hábiles. Pieza en distribución sin entrega ni movimiento desde 6 días hábiles. Sin presunción de extravío aún (se activa con 10 días sin movimiento después del vencimiento).
+
+**INSTRUCCIÓN AL EJECUTOR:**
+
+1. **RESPUESTA AL CLIENTE (vía web):** Utiliza la plantilla que el investigador haya reportado para "demora en interior con plazo vencido" (si es "plantilla_demora_interior_vencida" o similar, úsala; si no existe, responde con tono de cortesía reconociendo el vencimiento: "Confirmamos que su encomienda EN-204519 debería haber llegado hace 3 días hábiles. La pieza está en tránsito a Tucumán y ya hemos iniciado un seguimiento urgente con nuestro equipo de distribución en esa zona para confirmar la ubicación exacta y fecha de entrega in
+
+   Acciones realizadas hasta ahora: 0  ← la respuesta al cliente NO salió
+
+3) Decisión humana: {"aprobado": false, "comentario": "demo rechazo"}
+
+4) Estado final: DONE · acciones realizadas: 0
+
+Informe final:
+---
+
+## INFORME DE RESOLUCIÓN | RECLAMO EN-204519
+**Cliente:** Tienda Aurora | **Canal:** Web | **Pieza:** EN-204519
+
+---
+
+### DIAGNÓSTICO DE LA PIEZA
+
+La encomienda a Tucumán se encuentra en estado **EN_DISTRIBUCION** desde el 2026-11-10 sin movimiento registrado. Según el investigador (fuente: 03_plazos_de_entrega.md), el plazo máximo de entrega para Interior es de **5 días hábiles**, contados desde el día hábil siguiente a la imposición (2026-11-06).
+
+El analista determina que han transcurrido **8 días hábiles** desde la imposición hasta hoy (2026-11-18), arrojando un atraso de **3 días hábiles** (8 − 5 = 3). El plazo venció el 2026-11-13. La pieza lleva **6 días hábiles sin movimiento** desde su último evento.
+
+**Conclusión:** Plazo de entrega **VENCIDO** | Prioridad: **ALTA**
+
+---
+
+### NORMATIVA APLICADA
+
+Conforme a la política de reclamos (fuente: 04_politica_de_reclamos.md#"Prioridades"), una pieza con plazo de entrega vencido constituye un atraso de prioridad alta y requiere escalamiento inmediato. El investigador (fuente: 07_escalamiento_por_area.md#"Áreas y cuándo corresponden") confirma que el área responsable para cualquier problema de encomienda en Interior es **coordinacion_interior**.
+
+Respecto a presunción de extravío: el analista verifica que transcurrieron 6 días hábiles sin movimiento, inferior a los 10 días hábiles necesarios (fuente: 06_extravio_y_danos.md#"Cuándo se presume un extravío") para activar esa condición. Se trata, por tanto, de demora en distribución.
+
+---
+
+### ACCIONES REALIZADAS
+
+**Escalamiento iniciado:** Se procedía a escalar la pieza a **coordinacion_interior** con solicitud de gestión inmediata, remitiendo número de pieza (EN-204519), servicio (Encomienda), zona (Interior – Tucumán), estado actual (EN_DISTRIBUCION), días transcurridos (8 días hábiles), plazo del servicio (5 días hábiles) y atraso acumulado (3 días hábiles).
+
+**Respuesta al cliente:** Se utilizaría la Plantilla de respuesta: demora de entrega (versión 1 – plazo vencido, fuente: 11_plantilla_demora.md) informando estado actual, atraso y gestión solicitada al área responsable.
+
+**Estado:** Un humano **RECHAZÓ la acción propuesta**. **NO se ejecutó ningún escalamiento ni respuesta al cliente.**
+
+---
+
+**Advertencia:** Sin aprobación humana, el reclamo permanece en estado de análisis y no ha avanzado a gestión ni comunicación con el cliente.

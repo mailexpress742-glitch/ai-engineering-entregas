@@ -14,3 +14,7 @@ chroma_db/
 !modulo-5-agente-langgraph/trazas/memoria_demo.sqlite
 modulo-7-api-produccion/.venv-phoenix/
 modulo-7-api-produccion/.phoenix/
+
+modulo-8-entrega-final/.venv/
+modulo-8-entrega-final/.venv-phoenix/
+modulo-8-entrega-final/.phoenix/

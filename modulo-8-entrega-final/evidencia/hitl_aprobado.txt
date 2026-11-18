@@ -1,0 +1,53 @@
+1) Reclamo: Presunto extravío en Patagonia → CD-100236
+   job_id = 5b72e9b6296a4aa0b50cb8bf54ac9925  (la API respondió en 0.01 s; los agentes trabajan en segundo plano)
+
+2) El grafo se PAUSÓ pidiendo aprobación. Propuesta del sistema:
+   Responder a cliente Constructora Andina SRL por reclamo de CD-100236 (Neuquén). DIAGNÓSTICO: Plazo vencido por 17 días hábiles (8 hábiles desde 2026-10-14; vencimiento: 2026-10-24). Sin entrega registrada ni acuse. Sin movimientos por 23 días hábiles. PRESUNCIÓN DE EXTRAVÍO CONFIRMADA. ACCIONES: (1) Enviar respuesta al cliente usando plantilla_extravio.md (Plantilla de respuesta: presunto extravío), adaptando los datos: pieza CD-100236, zona Patagonia/Neuquén, días de demora (17 hábiles vencidos + 23 sin movimiento). (2) Escalar el caso a área SINIESTROS con prioridad ALTA indicando: estado EN_DISTRIBUCION, último evento 2026-10-16 "Salió a reparto", sin entrega ni acuse, 23 días sin movimientos. El cliente menciona "¿Se perdió?" — confirmar en la respuesta que se abre investigación de presunto extravío.
+
+   Acciones realizadas hasta ahora: 0  ← la respuesta al cliente NO salió
+
+3) Decisión humana: {"aprobado": true, "comentario": "demo aprobación"}
+
+4) Estado final: DONE · acciones realizadas: 2
+   - respuesta_cliente (CD-100236): {"destinatario": "Constructora Andina SRL", "asunto": "Gestión de búsqueda de su pieza CD-100236", "mensaje": "Estimado/a: su pieza CD-100236 no registra movimientos desde el 16 de octubre de 2026 y su plazo de entrega venció el 24 de octubre de 2026. Iniciamos una búsqueda con el área de Siniestros
+   - escalamiento (CD-100236): {"area": "siniestros", "prioridad": "alta", "resumen": "Presunto extravío confirmado. Pieza en estado EN_DISTRIBUCION sin movimientos desde 2026-10-16 (23 días hábiles sin registro). Plazo de entrega vencido por 17 días hábiles (vencimiento: 2026-10-24). Sin entrega registrada ni acuse de recibo. Co
+
+Informe final:
+# 📋 INFORME DE RESOLUCIÓN – RECLAMO CD-100236
+
+**Cliente:** Constructora Andina SRL  
+**Pieza:** CD-100236  
+**Canal:** Teléfono  
+**Reclamo:** Carta documento a Neuquén sin movimientos hace semanas
+
+---
+
+## 1. DIAGNÓSTICO DE LA PIEZA
+
+La pieza CD-100236 fue impuesta el **2026-10-14** en zona Patagonia (Neuquén) como Carta Documento. Según los datos del investigador (fuente: `03_plazos_de_entrega.md#Tabla de plazos`), el plazo de entrega para esta zona es de **8 días hábiles**.
+
+El analista calculó que desde la imposición hasta la consulta del cliente (**2026-11-18**) transcurrieron **25 días hábiles**, lo que representa un **atraso de 17 días hábiles** respecto del plazo estipulado (25 − 8 = 17). Además, la pieza no registra fecha de entrega y permanece en estado EN_DISTRIBUCION; su último movimiento fue "Salió a reparto" el **2026-10-16**, acumulando **23 días hábiles sin movimientos** (analista).
+
+Respecto de la presunción de extravío, el investigador establece (fuente: `06_extravio_y_danos.md#Presunción de extravío`) que esta ocurre cuando "pasan **10 días hábiles DESPUÉS del vencimiento del plazo de entrega SIN ningún movimiento nuevo**". El analista confirmó que la pieza supera esta condición: llevando 23 días sin movimientos y 17 días de vencimiento, la diferencia es de **13 días hábiles posteriores al vencimiento sin movimientos**, cumpliendo ampliamente el umbral de 10 días requerido.
+
+---
+
+## 2. NORMATIVA APLICADA
+
+- **Plazo de entrega (Patagonia):** 8 días hábiles (investigador, `03_plazos_de_entrega.md#Tabla de plazos y Zonas`).
+- **Evaluación de vencimiento:** Una pieza tiene plazo vencido cuando los días hábiles transcurridos desde imposición superan el plazo del servicio y la pieza no está entregada ni devuelta (investigador, `03_plazos_de_entrega.md#Cómo se evalúa el vencimiento`).
+- **Presunción de extravío:** Corresponde cuando transcurren 10 días hábiles sin movimientos después de que el plazo venció (investigador, `06_extravio_y_danos.md#Cuándo se presume un extravío`).
+- **Área de escalamiento:** Siniestros con prioridad alta para presunción de extravío (investigador, `07_escalamiento_por_area.md#Áreas y cuándo corresponden`).
+- **Búsqueda previa:** Siniestros realiza búsqueda en sucursales y ruta del distribuidor durante máximo 3 días hábiles (investigador, `06_extravio_y_danos.md#Búsqueda previa`).
+
+---
+
+## 3. ACCIONES REALIZADAS
+
+El ejecutor **envió respuesta** a Constructora Andina SRL mediante plantilla de Presunto Extravío (investigador, `13_plantilla_extravio.md`), informando que la pieza no registra movimientos desde el 2026-10-16 y que el plazo venció hace 17 días hábiles (analista), confirmando el inicio de investigación por búsqueda.
+
+Asimismo, el ejecutor **escaló el caso a Siniestros con prioridad ALTA** para que realice búsqueda inmediata en distribuidora y sucursales de Neuquén dentro del máximo de 3 días hábiles establecido por normativa (investigador).
+
+---
+
+**Nota:** El cliente tiene razón respecto de los 23 días hábiles (~4,5 semanas) sin movimientos desde el último evento de distribución.

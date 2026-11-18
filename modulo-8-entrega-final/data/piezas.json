@@ -1,0 +1,537 @@
+[
+  {
+    "pieza_id": "CD-100231",
+    "servicio": "carta_documento",
+    "cliente": "Estudio Ferraro & Asociados",
+    "provincia": "CABA",
+    "zona": "AMBA",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-11",
+    "eventos": [
+      {
+        "fecha": "2026-11-11",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      },
+      {
+        "fecha": "2026-11-12",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      }
+    ],
+    "estado": "EN_DISTRIBUCION",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "CD-100232",
+    "servicio": "carta_documento",
+    "cliente": "Marta Quiroga",
+    "provincia": "Buenos Aires",
+    "zona": "AMBA",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-16",
+    "eventos": [
+      {
+        "fecha": "2026-11-16",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Norte"
+      },
+      {
+        "fecha": "2026-11-17",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      }
+    ],
+    "estado": "EN_DISTRIBUCION",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "CD-100233",
+    "servicio": "carta_documento",
+    "cliente": "Estudio Ferraro & Asociados",
+    "provincia": "Mendoza",
+    "zona": "Interior",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-05",
+    "eventos": [
+      {
+        "fecha": "2026-11-05",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      },
+      {
+        "fecha": "2026-11-09",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      },
+      {
+        "fecha": "2026-11-12",
+        "estado": "VISITA_1_NEGATIVA",
+        "detalle": "Ausente; se dejó aviso de visita"
+      },
+      {
+        "fecha": "2026-11-16",
+        "estado": "VISITA_2_NEGATIVA",
+        "detalle": "Ausente; pieza en sucursal a disposición del destinatario"
+      }
+    ],
+    "estado": "VISITA_2_NEGATIVA",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "CD-100234",
+    "servicio": "carta_documento",
+    "cliente": "Banco del Litoral",
+    "provincia": "CABA",
+    "zona": "AMBA",
+    "cliente_corporativo": true,
+    "fecha_imposicion": "2026-11-02",
+    "eventos": [
+      {
+        "fecha": "2026-11-02",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      },
+      {
+        "fecha": "2026-11-03",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      },
+      {
+        "fecha": "2026-11-05",
+        "estado": "ENTREGADA",
+        "detalle": "Recibió un tercero en el domicilio"
+      }
+    ],
+    "estado": "ENTREGADA",
+    "fecha_entrega": "2026-11-05",
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "CD-100235",
+    "servicio": "carta_documento",
+    "cliente": "Banco del Litoral",
+    "provincia": "Córdoba",
+    "zona": "Interior",
+    "cliente_corporativo": true,
+    "fecha_imposicion": "2026-10-21",
+    "eventos": [
+      {
+        "fecha": "2026-10-21",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      },
+      {
+        "fecha": "2026-10-23",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      },
+      {
+        "fecha": "2026-10-28",
+        "estado": "ENTREGADA",
+        "detalle": "Recibió el destinatario"
+      }
+    ],
+    "estado": "ENTREGADA",
+    "fecha_entrega": "2026-10-28",
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "CD-100236",
+    "servicio": "carta_documento",
+    "cliente": "Constructora Andina SRL",
+    "provincia": "Neuquén",
+    "zona": "Patagonia",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-10-14",
+    "eventos": [
+      {
+        "fecha": "2026-10-14",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      },
+      {
+        "fecha": "2026-10-16",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      }
+    ],
+    "estado": "EN_DISTRIBUCION",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "EN-204518",
+    "servicio": "encomienda",
+    "cliente": "Tienda Aurora",
+    "provincia": "CABA",
+    "zona": "AMBA",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-17",
+    "eventos": [
+      {
+        "fecha": "2026-11-17",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      }
+    ],
+    "estado": "IMPUESTA",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "EN-204519",
+    "servicio": "encomienda",
+    "cliente": "Tienda Aurora",
+    "provincia": "Tucumán",
+    "zona": "Interior",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-06",
+    "eventos": [
+      {
+        "fecha": "2026-11-06",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      },
+      {
+        "fecha": "2026-11-10",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      }
+    ],
+    "estado": "EN_DISTRIBUCION",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "EN-204520",
+    "servicio": "encomienda",
+    "cliente": "Laura Benítez",
+    "provincia": "CABA",
+    "zona": "AMBA",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-12",
+    "eventos": [
+      {
+        "fecha": "2026-11-12",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Norte"
+      },
+      {
+        "fecha": "2026-11-13",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      },
+      {
+        "fecha": "2026-11-16",
+        "estado": "ENTREGADA",
+        "detalle": "Recibió el destinatario"
+      }
+    ],
+    "estado": "ENTREGADA",
+    "fecha_entrega": "2026-11-16",
+    "acuse_devuelto": true
+  },
+  {
+    "pieza_id": "EN-204521",
+    "servicio": "encomienda",
+    "cliente": "Constructora Andina SRL",
+    "provincia": "Chubut",
+    "zona": "Patagonia",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-10-06",
+    "eventos": [
+      {
+        "fecha": "2026-10-06",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      },
+      {
+        "fecha": "2026-10-13",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      }
+    ],
+    "estado": "EN_DISTRIBUCION",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "EN-204522",
+    "servicio": "encomienda",
+    "cliente": "Tienda Aurora",
+    "provincia": "Buenos Aires",
+    "zona": "AMBA",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-10",
+    "eventos": [
+      {
+        "fecha": "2026-11-10",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Norte"
+      },
+      {
+        "fecha": "2026-11-11",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      },
+      {
+        "fecha": "2026-11-12",
+        "estado": "VISITA_1_NEGATIVA",
+        "detalle": "Dirección inexistente"
+      },
+      {
+        "fecha": "2026-11-16",
+        "estado": "DEVUELTA",
+        "detalle": "Devuelta al remitente: dirección inexistente"
+      }
+    ],
+    "estado": "DEVUELTA",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "NT-310077",
+    "servicio": "notificacion",
+    "cliente": "Energía del Plata S.A.",
+    "provincia": "CABA",
+    "zona": "AMBA",
+    "cliente_corporativo": true,
+    "fecha_imposicion": "2026-11-10",
+    "eventos": [
+      {
+        "fecha": "2026-11-10",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en lote LT-5581"
+      },
+      {
+        "fecha": "2026-11-12",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      }
+    ],
+    "estado": "EN_DISTRIBUCION",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "NT-310078",
+    "servicio": "notificacion",
+    "cliente": "Energía del Plata S.A.",
+    "provincia": "Córdoba",
+    "zona": "Interior",
+    "cliente_corporativo": true,
+    "fecha_imposicion": "2026-11-11",
+    "eventos": [
+      {
+        "fecha": "2026-11-11",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en lote LT-5581"
+      },
+      {
+        "fecha": "2026-11-13",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      }
+    ],
+    "estado": "EN_DISTRIBUCION",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "NT-310079",
+    "servicio": "notificacion",
+    "cliente": "Energía del Plata S.A.",
+    "provincia": "Buenos Aires",
+    "zona": "AMBA",
+    "cliente_corporativo": true,
+    "fecha_imposicion": "2026-11-09",
+    "eventos": [
+      {
+        "fecha": "2026-11-09",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en lote LT-5580"
+      },
+      {
+        "fecha": "2026-11-10",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      },
+      {
+        "fecha": "2026-11-13",
+        "estado": "ENTREGADA",
+        "detalle": "Recibió el destinatario"
+      }
+    ],
+    "estado": "ENTREGADA",
+    "fecha_entrega": "2026-11-13",
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "CD-100237",
+    "servicio": "carta_documento",
+    "cliente": "Estudio Ferraro & Asociados",
+    "provincia": "CABA",
+    "zona": "AMBA",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-12",
+    "eventos": [
+      {
+        "fecha": "2026-11-12",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      },
+      {
+        "fecha": "2026-11-13",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      },
+      {
+        "fecha": "2026-11-17",
+        "estado": "VISITA_1_NEGATIVA",
+        "detalle": "Ausente; se dejó aviso de visita"
+      }
+    ],
+    "estado": "VISITA_1_NEGATIVA",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "CD-100238",
+    "servicio": "carta_documento",
+    "cliente": "Marta Quiroga",
+    "provincia": "Mendoza",
+    "zona": "Interior",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-09",
+    "eventos": [
+      {
+        "fecha": "2026-11-09",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Norte"
+      },
+      {
+        "fecha": "2026-11-11",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      }
+    ],
+    "estado": "EN_DISTRIBUCION",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "EN-204523",
+    "servicio": "encomienda",
+    "cliente": "Laura Benítez",
+    "provincia": "Buenos Aires",
+    "zona": "AMBA",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-13",
+    "eventos": [
+      {
+        "fecha": "2026-11-13",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Norte"
+      },
+      {
+        "fecha": "2026-11-16",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      }
+    ],
+    "estado": "EN_DISTRIBUCION",
+    "fecha_entrega": null,
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "CD-100239",
+    "servicio": "carta_documento",
+    "cliente": "Banco del Litoral",
+    "provincia": "CABA",
+    "zona": "AMBA",
+    "cliente_corporativo": true,
+    "fecha_imposicion": "2026-10-28",
+    "eventos": [
+      {
+        "fecha": "2026-10-28",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      },
+      {
+        "fecha": "2026-10-29",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      },
+      {
+        "fecha": "2026-10-30",
+        "estado": "ENTREGADA",
+        "detalle": "Recibió el destinatario"
+      }
+    ],
+    "estado": "ENTREGADA",
+    "fecha_entrega": "2026-10-30",
+    "acuse_devuelto": true
+  },
+  {
+    "pieza_id": "CD-100240",
+    "servicio": "carta_documento",
+    "cliente": "Estudio Ferraro & Asociados",
+    "provincia": "Mendoza",
+    "zona": "Interior",
+    "cliente_corporativo": false,
+    "fecha_imposicion": "2026-11-04",
+    "eventos": [
+      {
+        "fecha": "2026-11-04",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en sucursal Centro"
+      },
+      {
+        "fecha": "2026-11-06",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      },
+      {
+        "fecha": "2026-11-12",
+        "estado": "ENTREGADA",
+        "detalle": "Recibió el destinatario"
+      }
+    ],
+    "estado": "ENTREGADA",
+    "fecha_entrega": "2026-11-12",
+    "acuse_devuelto": false
+  },
+  {
+    "pieza_id": "NT-310080",
+    "servicio": "notificacion",
+    "cliente": "Energía del Plata S.A.",
+    "provincia": "Neuquén",
+    "zona": "Patagonia",
+    "cliente_corporativo": true,
+    "fecha_imposicion": "2026-09-22",
+    "eventos": [
+      {
+        "fecha": "2026-09-22",
+        "estado": "IMPUESTA",
+        "detalle": "Impuesta en lote LT-5502"
+      },
+      {
+        "fecha": "2026-09-25",
+        "estado": "EN_DISTRIBUCION",
+        "detalle": "Salió a reparto"
+      },
+      {
+        "fecha": "2026-09-29",
+        "estado": "ENTREGADA",
+        "detalle": "Recibió el destinatario"
+      }
+    ],
+    "estado": "ENTREGADA",
+    "fecha_entrega": "2026-09-29",
+    "acuse_devuelto": false
+  }
+]
