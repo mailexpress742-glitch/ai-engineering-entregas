@@ -42,6 +42,12 @@ RECURSION_LIMIT = 25
 Ruta = Literal["investigador", "analista", "aprobacion", "sintetizador"]
 Sintetizar = Callable[[EstadoOrquestador], Awaitable[str]]
 
+RECORDATORIO_EJECUTOR = (
+    "\n\nIMPORTANTE: tu respuesta anterior no llamó a ninguna herramienta, y sin eso no se realiza nada. "
+    "Llamá AHORA a `responder_cliente` (y a `escalar_caso` si corresponde). Si la instrucción contradice el "
+    "diagnóstico del analista, seguí al analista, pero ejecutá igual."
+)
+
 SINTETIZADOR_PROMPT = (
     "Sos el SINTETIZADOR de la mesa de reclamos de MailEx. Redactá el INFORME DE RESOLUCIÓN del reclamo para "
     "el agente de Atención al Cliente, usando EXCLUSIVAMENTE los aportes del investigador, el analista y el "
@@ -53,8 +59,10 @@ SINTETIZADOR_PROMPT = (
     "- Citá las fuentes (archivo#sección) de los datos y mostrá cómo se calculó cada cifra, "
     "atribuyendo cada parte a quien la aportó: los datos al «investigador» y los cálculos al "
     "«analista». Nunca te atribuyas cálculos ni datos.\n"
-    "- Si hubo acciones (respuesta al cliente, escalamiento), indicá que las realizó el «ejecutor» tras la "
-    "aprobación humana; si un humano la rechazó, decí claramente que NO se realizó ninguna acción.\n"
+    "- Informá como realizadas SOLO las acciones que figuren en «ACCIONES REGISTRADAS» (responder_cliente = "
+    "respuesta al cliente, escalar_caso = escalamiento), diciendo que las realizó el «ejecutor» tras la "
+    "aprobación humana. Si dice NINGUNA, o un humano rechazó la acción, decí claramente que NO se realizó "
+    "ninguna acción y que el caso queda pendiente; nunca des por enviado algo que no figure ahí.\n"
     "- Si los aportes se contradicen entre sí o con la solicitud, señalalo explícitamente en vez de "
     "elegir uno en silencio.\n"
     "- No uses marcadores de posición (como «[hoy]»), ni agregues encabezados o fechas que no estén en los aportes.\n"
@@ -101,6 +109,15 @@ def _crear_nodo_especialista(
         fallida = False
         try:
             res = await ejecutar(entrada)
+            if nombre == "ejecutor" and not res["herramientas_usadas"]:
+                # El ejecutor existe para ACTUAR: terminar sin llamar a ninguna herramienta no es un resultado válido.
+                logger.warning("ejecutor terminó sin usar herramientas: se reintenta una vez")
+                res = await ejecutar(entrada + RECORDATORIO_EJECUTOR)
+                if not res["herramientas_usadas"]:
+                    fallida = True
+                    advertencias.append("El ejecutor no realizó ninguna acción (no llamó a sus herramientas).")
+                    res = {"contenido": "[El ejecutor no realizó ninguna acción: no se registró ningún envío ni escalamiento]",
+                           "herramientas_usadas": [], "fuentes": []}
         except Exception as exc:  # noqa: BLE001 - un especialista caído no tumba el sistema
             logger.error("%s falló: %s: %s", nombre, type(exc).__name__, exc)
             res = {"contenido": f"[El {nombre} no pudo completar la tarea: {type(exc).__name__}]",
@@ -135,6 +152,13 @@ def crear_sintetizador_llm(llm: BaseChatModel) -> Sintetizar:
             aportes = contribuciones_vigentes(estado, agente)
             if aportes:
                 partes.append(f"APORTES DEL {agente.upper()}:\n{texto_de_aportes(aportes)}\n")
+        ejecuciones = [c for c in estado.get("contribuciones", []) if c["agente"] == "ejecutor"]
+        if ejecuciones:  # lo único que cuenta como "realizado" es lo que el ejecutor registró con sus herramientas
+            hechas = [h for c in ejecuciones if not c.get("fallida") for h in c["herramientas_usadas"]]
+            partes.append(
+                "ACCIONES REGISTRADAS (herramientas que el ejecutor llamó de verdad): "
+                + (", ".join(hechas) if hechas else "NINGUNA: no se envió ninguna respuesta ni se escaló nada")
+            )
         if estado.get("advertencias"):
             partes.append("ADVERTENCIAS: " + " | ".join(estado["advertencias"]))
         resp = await llm.ainvoke([SystemMessage(SINTETIZADOR_PROMPT), HumanMessage("\n".join(partes))])

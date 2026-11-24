@@ -121,3 +121,56 @@ async def test_un_supervisor_que_insiste_con_el_investigador_no_se_salta_el_anal
     assert flujo[:4] == ["investigador", "investigador", "analista", "ejecutor"], flujo
     assert snap.next == ("aprobacion",)  # y termina pidiendo la aprobación humana, no cerrando en falso
     assert "R3_limite_de_refinamientos" in [d["regla_aplicada"] for d in snap.values["decisiones"]]
+
+
+# --- Regresión real: el ejecutor terminó SIN llamar a ninguna herramienta y el informe dijo que había actuado ---
+async def _ejecutor_mudo(_entrada):
+    return {"contenido": "Detecté una contradicción; no hago nada.", "herramientas_usadas": [], "fuentes": []}
+
+
+async def test_ejecutor_que_no_llama_herramientas_se_reintenta_una_vez(redis_factory):
+    entradas: list[str] = []
+
+    async def eje(entrada):
+        entradas.append(entrada)
+        if len(entradas) == 1:
+            return await _ejecutor_mudo(entrada)  # primer intento: mudo
+        await action_agent.responder_cliente(
+            pieza_id="CD-100231", destinatario="Cliente de prueba", asunto="Seguimiento de su pieza CD-100231",
+            mensaje="Estimado/a cliente: su pieza CD-100231 tiene 2 días hábiles de atraso.",
+        )
+        return {"contenido": "Respuesta enviada.", "herramientas_usadas": ["responder_cliente"], "fuentes": []}
+
+    graph = grafo_con_redis(redis_factory, *FLUJO_CON_ACCION, ejecutor=eje)
+    await graph.ainvoke(CONSULTA, cfg("t_reint"))
+    final = await graph.ainvoke(Command(resume={"aprobado": True, "comentario": "ok"}), cfg("t_reint"))
+
+    assert len(entradas) == 2 and "no llamó a ninguna herramienta" in entradas[1]
+    assert len(action_agent.ENVIADOS) == 1
+    ejecutor = [c for c in final["contribuciones"] if c["agente"] == "ejecutor"]
+    assert len(ejecutor) == 1 and not ejecutor[0]["fallida"]
+
+
+async def test_ejecutor_mudo_queda_como_fallido_y_el_informe_no_afirma_que_actuo(redis_factory):
+    from langchain_core.messages import AIMessage
+
+    from app.graph import crear_sintetizador_llm
+
+    vistos: list[str] = []
+
+    class LLMFalso:
+        async def ainvoke(self, mensajes):
+            vistos.append(mensajes[-1].content)
+            return AIMessage(content="informe")
+
+    graph = grafo_con_redis(
+        redis_factory, *FLUJO_CON_ACCION, ejecutor=_ejecutor_mudo, sintetizar=crear_sintetizador_llm(LLMFalso()),
+    )
+    await graph.ainvoke(CONSULTA, cfg("t_mudo"))
+    final = await graph.ainvoke(Command(resume={"aprobado": True, "comentario": "ok"}), cfg("t_mudo"))
+
+    assert action_agent.ENVIADOS == []  # no hubo envío
+    assert [c["fallida"] for c in final["contribuciones"] if c["agente"] == "ejecutor"] == [True]
+    assert any("no realizó ninguna acción" in a for a in final["advertencias"])
+    assert "NINGUNA" in vistos[0]  # el sintetizador recibe explícito que no se hizo nada
+    assert final["task_completed"]
