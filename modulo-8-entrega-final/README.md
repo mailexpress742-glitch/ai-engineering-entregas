@@ -121,7 +121,7 @@ modulo-8-entrega-final/
 │   └── piezas.json             # 20 piezas sintéticas de seguimiento
 ├── eval/golden_set.json        # 20 preguntas con su documento esperado
 ├── scripts/                    # ingestar · carga · demo_hitl · evaluar_rag · generar_*
-├── tests/                      # 66 tests sin red ni cuenta de nada
+├── tests/                      # 68 tests sin red ni cuenta de nada
 ├── screenshots/ · evidencia/   # capturas de Phoenix y resultados reales de las pruebas
 ├── docker-compose.yml · Dockerfile · run.sh · run.ps1 · .env.example
 ├── requirements*.txt · grafo.mmd
@@ -282,8 +282,22 @@ Notas sobre lo que se ve en el dashboard:
 
 ```bash
 pip install -r requirements.txt -r requirements-dev.txt
-pytest          # 66 tests, ~10 s, sin red ni cuentas (Redis falso, LLM de guion, Pinecone de juguete)
+pytest          # 68 tests, ~10 s, sin red ni cuentas (Redis falso, LLM de guion, Pinecone de juguete)
 ```
+
+La salida completa de una corrida está en [`evidencia/pytest.txt`](evidencia/pytest.txt).
+
+**Contra un Redis real** (en vez de fakeredis): levantá uno descartable y apuntá la suite a una base distinta de la 0
+(se **vacía** antes de cada test; con la 0 la suite se niega a correr):
+
+```bash
+docker run -d --name redis-test -p 6379:6379 redis:7-alpine
+TEST_REDIS_URL=redis://localhost:6379/15 pytest
+```
+
+> Probé ese modo solo contra el servidor TCP de desarrollo (`dev/redis_local.py`, que habla el protocolo de Redis): 67 de
+> 68 pasan y falla `test_cinco_peticiones_concurrentes_no_se_bloquean_entre_si` (umbral de 2 s), porque ese emulador es
+> muy lento por red (la suite tarda ~160 s en vez de ~10 s). **No lo corrí contra un Redis real.**
 
 Cubren: el grafo y las reglas del supervisor (R0–R6), el checkpointer y la reanudación tras un reinicio, la aprobación
 (aprobar, rechazar, concurrencia), la API (202, 404, 409, 422, `FAILED`, timeout, 5 peticiones concurrentes, jobs

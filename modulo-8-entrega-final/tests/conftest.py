@@ -2,14 +2,20 @@
 
 from __future__ import annotations
 
+import os
+
 import fakeredis
 import pytest
 from fakeredis import FakeAsyncRedis
+from redis.asyncio import Redis as AsyncRedis
 
 from app.agents import action_agent
 from app.graph import build_graph
 from app.redis_checkpointer import AsyncRedisCheckpointer
 from app.supervisor import DecisionLLM
+
+
+REDIS_REAL = os.getenv("TEST_REDIS_URL", "").strip()  # ej.: redis://localhost:6379/15  (corre la suite contra un Redis REAL)
 
 
 @pytest.fixture
@@ -19,8 +25,20 @@ def servidor_redis() -> fakeredis.FakeServer:
 
 @pytest.fixture
 def redis_factory(servidor_redis):
-    """Igual que en producción: un cliente con decode_responses (jobs) y otro binario (checkpoints)."""
-    return lambda decode: FakeAsyncRedis(server=servidor_redis, decode_responses=decode)
+    """Igual que en producción: un cliente con decode_responses (jobs) y otro binario (checkpoints).
+
+    Por defecto usa fakeredis (sin red). Con ``TEST_REDIS_URL`` usa un Redis real; esa base se VACÍA antes de cada
+    test, por eso se exige una distinta de la 0 (usá una instancia descartable)."""
+    if not REDIS_REAL:
+        return lambda decode: FakeAsyncRedis(server=servidor_redis, decode_responses=decode)
+    from redis import Redis
+
+    base = Redis.from_url(REDIS_REAL)
+    if base.connection_pool.connection_kwargs.get("db", 0) == 0:
+        pytest.exit("TEST_REDIS_URL debe apuntar a una base distinta de la 0 (se vacía en cada test): redis://host:6379/15", 2)
+    base.flushdb()
+    base.close()
+    return lambda decode: AsyncRedis.from_url(REDIS_REAL, decode_responses=decode)
 
 
 @pytest.fixture(autouse=True)
